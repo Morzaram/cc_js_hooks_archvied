@@ -1,0 +1,28 @@
+<h1>Show Individual</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @individual.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @individual.last_name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @individual.description %>
+  </li>
+
+  <li>
+    <strong>Pro climate:</strong>
+    <%= @individual.pro_climate %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.individual_path(@conn, :edit, @individual) %></span> |
+<span><%= link "Back", to: Routes.individual_path(@conn, :index) %></span>

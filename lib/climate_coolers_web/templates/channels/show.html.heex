@@ -1,0 +1,18 @@
+<h1>Show Channels</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @channels.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @channels.url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.channels_path(@conn, :edit, @channels) %></span> |
+<span><%= link "Back", to: Routes.channels_path(@conn, :index) %></span>

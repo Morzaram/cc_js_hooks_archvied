@@ -1,0 +1,32 @@
+<h1>Listing Individuals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Description</th>
+      <th>Pro climate</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for individual <- @individuals do %>
+    <tr>
+      <td><%= individual.first_name %></td>
+      <td><%= individual.last_name %></td>
+      <td><%= individual.description %></td>
+      <td><%= individual.pro_climate %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.individual_path(@conn, :show, individual) %></span>
+        <span><%= link "Edit", to: Routes.individual_path(@conn, :edit, individual) %></span>
+        <span><%= link "Delete", to: Routes.individual_path(@conn, :delete, individual), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Individual", to: Routes.individual_path(@conn, :new) %></span>

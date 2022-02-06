@@ -1,0 +1,5 @@
+<h1>Edit Channels</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.channels_path(@conn, :update, @channels)) %>
+
+<span><%= link "Back", to: Routes.channels_path(@conn, :index) %></span>
