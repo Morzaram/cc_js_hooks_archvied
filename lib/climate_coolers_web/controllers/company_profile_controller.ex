@@ -1,7 +1,7 @@
 defmodule ClimateCoolersWeb.CompanyProfileController do
   use ClimateCoolersWeb, :controller
 
-  alias ClimateCoolers.CompanyProfiles.Profile
+  alias ClimateCoolers.Profiles.CompanyProfile, as: Profile
 
   def index(conn, _params) do
     company_profiles = Company.list_company_profiles()

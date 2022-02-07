@@ -2,7 +2,7 @@ defmodule ClimateCoolersWeb.CompanyProfileLive.Index do
   use ClimateCoolersWeb, :live_view
 
   alias ClimateCoolers.CompanyProfiles
-  alias ClimateCoolers.CompanyProfiles.Profile
+  alias ClimateCoolers.Profiles.CompanyProfile, as: Profile
 
   @impl true
   def mount(_params, _session, socket) do

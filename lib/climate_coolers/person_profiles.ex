@@ -2,14 +2,11 @@ defmodule ClimateCoolers.PersonProfiles do
   @moduledoc """
   The PersonProfiles context.
   """
-  import IEx
   import Ecto.Query, warn: false
   import Ecto
   alias ClimateCoolers.Repo
 
-  alias ClimateCoolers.PersonProfiles.Profile
-  alias ClimateCoolers.ProfileImages.Image
-  alias ClimateCoolers.ProfileLink.Link
+  alias ClimateCoolers.Profiles.PersonProfile, as: Profile
 
   @doc """
   Returns the list of person_profiles.
