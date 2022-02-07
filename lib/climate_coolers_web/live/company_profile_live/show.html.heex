@@ -1,14 +1,14 @@
 <h1>Show Profile</h1>
 
 <%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.profile_show_path(@socket, :show, @profile)}>
+  <.modal return_to={Routes.company_profile_show_path(@socket, :show, @profile)}>
     <.live_component
-      module={ClimateCoolersWeb.CompanyProfileLive.FormComponent}
+      module={ClimateCoolersWeb.ProfileLive.FormComponent}
       id={@profile.id}
       title={@page_title}
       action={@live_action}
       profile={@profile}
-      return_to={Routes.profile_show_path(@socket, :show, @profile)}
+      return_to={Routes.company_profile_show_path(@socket, :show, @profile)}
     />
   </.modal>
 <% end %>
@@ -20,7 +20,22 @@
     <%= @profile.name %>
   </li>
 
+  <li>
+    <strong>Description:</strong>
+    <%= @profile.description %>
+  </li>
+
+  <li>
+    <strong>Established:</strong>
+    <%= @profile.established %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @profile.url %>
+  </li>
+
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.profile_show_path(@socket, :edit, @profile), class: "button" %></span> |
+<span><%= live_patch "Edit", to: Routes.company_profile_show_path(@socket, :edit, @profile), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.company_profile_index_path(@socket, :index) %></span>

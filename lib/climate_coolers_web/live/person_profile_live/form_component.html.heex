@@ -20,6 +20,14 @@
     <%= label f, :birthdate %>
     <%= date_select f, :birthdate %>
     <%= error_tag f, :birthdate %>
+
+    <%= inputs_for f, :links, fn fl -> %>
+      <%= text_input fl, :url %>
+    <% end %>
+
+    <%= inputs_for f, :pics, [multipart: true], fn fl -> %>
+      <%= text_input fl, :url %>
+    <% end %>
   
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>

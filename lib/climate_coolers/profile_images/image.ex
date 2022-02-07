@@ -2,12 +2,15 @@ defmodule ClimateCoolers.ProfileImages.Image do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias ClimateCoolers.PersonProfiles
+  alias ClimateCoolers.CompanyProfiles
+
   schema "profile_images" do
     field :alt, :string
     field :url, :string
-    field :person_id, :id
-    field :company_id, :id
 
+    belongs_to :person_profile, PersonProfiles.Profile
+    belongs_to :company_profile, CompanyProfiles.Profile
     timestamps()
   end
 

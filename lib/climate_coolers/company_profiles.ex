@@ -2,11 +2,13 @@ defmodule ClimateCoolers.CompanyProfiles do
   @moduledoc """
   The CompanyProfiles context.
   """
-
+  import Ecto.Changeset
   import Ecto.Query, warn: false
   alias ClimateCoolers.Repo
 
   alias ClimateCoolers.CompanyProfiles.Profile
+  alias ClimateCoolers.ProfileImages.Image
+  alias ClimateCoolers.ProfileLink.Link
 
   @doc """
   Returns the list of company_profiles.
@@ -196,5 +198,7 @@ defmodule ClimateCoolers.CompanyProfiles do
   """
   def change_profile(%Profile{} = profile, attrs \\ %{}) do
     Profile.changeset(profile, attrs)
+    |> put_assoc(:links, %Link{})
+    |> put_assoc(:profile_pictures, %Image{})
   end
 end

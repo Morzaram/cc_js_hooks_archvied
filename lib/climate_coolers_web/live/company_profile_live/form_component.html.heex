@@ -13,6 +13,26 @@
     <%= text_input f, :name %>
     <%= error_tag f, :name %>
   
+    <%= label f, :description %>
+    <%= text_input f, :description %>
+    <%= error_tag f, :description %>
+  
+    <%= label f, :established %>
+    <%= date_select f, :established %>
+    <%= error_tag f, :established %>
+  
+    <%= label f, :url %>
+    <%= text_input f, :url %>
+    <%= error_tag f, :url %>
+  
+    <%= inputs_for f, :links, fn fl -> %>
+      <%= text_input fl, :url %>
+    <% end %>
+
+    <%= inputs_for f, :pics, [multipart: true], fn fl -> %>
+      <%= text_input fl, :url %>
+    <% end %>
+    
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>

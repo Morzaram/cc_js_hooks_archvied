@@ -3,7 +3,7 @@
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.company_profile_index_path(@socket, :index)}>
     <.live_component
-      module={ClimateCoolersWeb.CompanyProfileLive.FormComponent}
+      module={ClimateCoolersWeb.ProfileLive.FormComponent}
       id={@profile.id || :new}
       title={@page_title}
       action={@live_action}
@@ -17,6 +17,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Description</th>
+      <th>Established</th>
+      <th>Url</th>
 
       <th></th>
     </tr>
@@ -25,9 +28,12 @@
     <%= for profile <- @company_profiles do %>
       <tr id={"profile-#{profile.id}"}>
         <td><%= profile.name %></td>
+        <td><%= profile.description %></td>
+        <td><%= profile.established %></td>
+        <td><%= profile.url %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.profile_show_path(@socket, :show, profile) %></span>
+          <span><%= live_redirect "Show", to: Routes.company_profile_show_path(@socket, :show, profile) %></span>
           <span><%= live_patch "Edit", to: Routes.company_profile_index_path(@socket, :edit, profile) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: profile.id, data: [confirm: "Are you sure?"] %></span>
         </td>

@@ -5,27 +5,16 @@ defmodule ClimateCoolers.CompanyProfilesFixtures do
   """
 
   @doc """
-  Generate a company_profile.
-  """
-  def company_profile_fixture(attrs \\ %{}) do
-    {:ok, company_profile} =
-      attrs
-      |> Enum.into(%{
-        name: "some name"
-      })
-      |> ClimateCoolers.CompanyProfiles.create_company_profile()
-
-    company_profile
-  end
-
-  @doc """
   Generate a profile.
   """
   def profile_fixture(attrs \\ %{}) do
     {:ok, profile} =
       attrs
       |> Enum.into(%{
-        name: "some name"
+        description: "some description",
+        established: ~D[2022-02-06],
+        name: "some name",
+        url: "some url"
       })
       |> ClimateCoolers.CompanyProfiles.create_profile()
 

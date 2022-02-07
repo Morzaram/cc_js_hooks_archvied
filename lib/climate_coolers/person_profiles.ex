@@ -2,11 +2,14 @@ defmodule ClimateCoolers.PersonProfiles do
   @moduledoc """
   The PersonProfiles context.
   """
-
+  import IEx
   import Ecto.Query, warn: false
+  import Ecto
   alias ClimateCoolers.Repo
 
   alias ClimateCoolers.PersonProfiles.Profile
+  alias ClimateCoolers.ProfileImages.Image
+  alias ClimateCoolers.ProfileLink.Link
 
   @doc """
   Returns the list of person_profiles.
@@ -99,6 +102,15 @@ defmodule ClimateCoolers.PersonProfiles do
 
   """
   def change_profile(%Profile{} = profile, attrs \\ %{}) do
+    IEx.pry()
+
+    # if profile_id exists
+    profile =
+      profile
+      |> build_assoc(:pics)
+      |> build_assoc(:links)
+
+    # else
     Profile.changeset(profile, attrs)
   end
 end

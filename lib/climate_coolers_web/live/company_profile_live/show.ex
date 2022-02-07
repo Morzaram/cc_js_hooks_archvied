@@ -1,4 +1,4 @@
-defmodule ClimateCoolersWeb.CompanyCompanyProfileLive.Show do
+defmodule ClimateCoolersWeb.CompanyProfileLive.Show do
   use ClimateCoolersWeb, :live_view
 
   alias ClimateCoolers.CompanyProfiles

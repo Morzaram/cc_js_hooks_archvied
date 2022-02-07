@@ -4,8 +4,14 @@ defmodule ClimateCoolers.Repo.Migrations.CreateCompanyProfiles do
   def change do
     create table(:company_profiles) do
       add :name, :string
+      add :description, :string
+      add :established, :date
+      add :url, :string
+      add :owner_id, references(:users, on_delete: :nothing)
 
       timestamps()
     end
+
+    create index(:company_profiles, [:owner_id])
   end
 end

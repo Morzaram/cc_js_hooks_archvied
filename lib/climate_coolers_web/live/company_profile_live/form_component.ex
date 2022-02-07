@@ -1,7 +1,9 @@
-defmodule ClimateCoolersWeb.CompanyCompanyProfileLive.FormComponent do
+defmodule ClimateCoolersWeb.CompanyProfileLive.FormComponent do
   use ClimateCoolersWeb, :live_component
 
   alias ClimateCoolers.CompanyProfiles
+  alias ClimateCoolers.ProfileImages.Image
+  alias ClimateCoolers.ProfileLink.Link
 
   @impl true
   def update(%{profile: profile} = assigns, socket) do

@@ -1,120 +1,110 @@
-defmodule ClimateCoolersWeb.PersonPersonProfileLiveTest do
+defmodule ClimateCoolersWeb.ProfileLiveTest do
   use ClimateCoolersWeb.ConnCase
 
   import Phoenix.LiveViewTest
-  import ClimateCoolers.ProfilesFixtures
+  import ClimateCoolers.PersonProfilesFixtures
 
-  @create_attrs %{name: "some name"}
-  @update_attrs %{name: "some updated name"}
-  @invalid_attrs %{name: nil}
+  @create_attrs %{birthdate: %{day: 6, month: 2, year: 2022}, description: "some description", name: "some name"}
+  @update_attrs %{birthdate: %{day: 7, month: 2, year: 2022}, description: "some updated description", name: "some updated name"}
+  @invalid_attrs %{birthdate: %{day: 30, month: 2, year: 2022}, description: nil, name: nil}
 
-  defp create_person_profile(_) do
-    person_profile = person_profile_fixture()
-    %{person_profile: person_profile}
+  defp create_profile(_) do
+    profile = profile_fixture()
+    %{profile: profile}
   end
 
   describe "Index" do
-    setup [:create_person_profile]
+    setup [:create_profile]
 
-    test "lists all person_profiles", %{conn: conn, person_profile: person_profile} do
-      {:ok, _index_live, html} = live(conn, Routes.person_person_profile_index_path(conn, :index))
+    test "lists all person_profiles", %{conn: conn, profile: profile} do
+      {:ok, _index_live, html} = live(conn, Routes.profile_index_path(conn, :index))
 
       assert html =~ "Listing Person profiles"
-      assert html =~ person_profile.name
+      assert html =~ profile.description
     end
 
-    test "saves new person_profile", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, Routes.person_person_profile_index_path(conn, :index))
+    test "saves new profile", %{conn: conn} do
+      {:ok, index_live, _html} = live(conn, Routes.profile_index_path(conn, :index))
 
-      assert index_live |> element("a", "New Person profile") |> render_click() =~
-               "New Person profile"
+      assert index_live |> element("a", "New Profile") |> render_click() =~
+               "New Profile"
 
-      assert_patch(index_live, Routes.person_person_profile_index_path(conn, :new))
+      assert_patch(index_live, Routes.profile_index_path(conn, :new))
 
       assert index_live
-             |> form("#person_profile-form", person_profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> form("#profile-form", profile: @invalid_attrs)
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         index_live
-        |> form("#person_profile-form", person_profile: @create_attrs)
+        |> form("#profile-form", profile: @create_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.person_person_profile_index_path(conn, :index))
+        |> follow_redirect(conn, Routes.profile_index_path(conn, :index))
 
-      assert html =~ "Person profile created successfully"
-      assert html =~ "some name"
+      assert html =~ "Profile created successfully"
+      assert html =~ "some description"
     end
 
-    test "updates person_profile in listing", %{conn: conn, person_profile: person_profile} do
-      {:ok, index_live, _html} = live(conn, Routes.person_person_profile_index_path(conn, :index))
+    test "updates profile in listing", %{conn: conn, profile: profile} do
+      {:ok, index_live, _html} = live(conn, Routes.profile_index_path(conn, :index))
+
+      assert index_live |> element("#profile-#{profile.id} a", "Edit") |> render_click() =~
+               "Edit Profile"
+
+      assert_patch(index_live, Routes.profile_index_path(conn, :edit, profile))
 
       assert index_live
-             |> element("#person_profile-#{person_profile.id} a", "Edit")
-             |> render_click() =~
-               "Edit Person profile"
-
-      assert_patch(
-        index_live,
-        Routes.person_person_profile_index_path(conn, :edit, person_profile)
-      )
-
-      assert index_live
-             |> form("#person_profile-form", person_profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> form("#profile-form", profile: @invalid_attrs)
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         index_live
-        |> form("#person_profile-form", person_profile: @update_attrs)
+        |> form("#profile-form", profile: @update_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.person_person_profile_index_path(conn, :index))
+        |> follow_redirect(conn, Routes.profile_index_path(conn, :index))
 
-      assert html =~ "Person profile updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "Profile updated successfully"
+      assert html =~ "some updated description"
     end
 
-    test "deletes person_profile in listing", %{conn: conn, person_profile: person_profile} do
-      {:ok, index_live, _html} = live(conn, Routes.person_person_profile_index_path(conn, :index))
+    test "deletes profile in listing", %{conn: conn, profile: profile} do
+      {:ok, index_live, _html} = live(conn, Routes.profile_index_path(conn, :index))
 
-      assert index_live
-             |> element("#person_profile-#{person_profile.id} a", "Delete")
-             |> render_click()
-
-      refute has_element?(index_live, "#person_profile-#{person_profile.id}")
+      assert index_live |> element("#profile-#{profile.id} a", "Delete") |> render_click()
+      refute has_element?(index_live, "#profile-#{profile.id}")
     end
   end
 
   describe "Show" do
-    setup [:create_person_profile]
+    setup [:create_profile]
 
-    test "displays person_profile", %{conn: conn, person_profile: person_profile} do
-      {:ok, _show_live, html} =
-        live(conn, Routes.person_profile_show_path(conn, :show, person_profile))
+    test "displays profile", %{conn: conn, profile: profile} do
+      {:ok, _show_live, html} = live(conn, Routes.profile_show_path(conn, :show, profile))
 
-      assert html =~ "Show Person profile"
-      assert html =~ person_profile.name
+      assert html =~ "Show Profile"
+      assert html =~ profile.description
     end
 
-    test "updates person_profile within modal", %{conn: conn, person_profile: person_profile} do
-      {:ok, show_live, _html} =
-        live(conn, Routes.person_profile_show_path(conn, :show, person_profile))
+    test "updates profile within modal", %{conn: conn, profile: profile} do
+      {:ok, show_live, _html} = live(conn, Routes.profile_show_path(conn, :show, profile))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-               "Edit Person profile"
+               "Edit Profile"
 
-      assert_patch(show_live, Routes.person_profile_show_path(conn, :edit, person_profile))
+      assert_patch(show_live, Routes.profile_show_path(conn, :edit, profile))
 
       assert show_live
-             |> form("#person_profile-form", person_profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> form("#profile-form", profile: @invalid_attrs)
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         show_live
-        |> form("#person_profile-form", person_profile: @update_attrs)
+        |> form("#profile-form", profile: @update_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.person_profile_show_path(conn, :show, person_profile))
+        |> follow_redirect(conn, Routes.profile_show_path(conn, :show, profile))
 
-      assert html =~ "Person profile updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "Profile updated successfully"
+      assert html =~ "some updated description"
     end
   end
 end
