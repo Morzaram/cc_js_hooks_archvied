@@ -1,0 +1,26 @@
+<h1>Listing Invitations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invite token</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for inivitation <- @invitations do %>
+    <tr>
+      <td><%= inivitation.invite_token %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.inivitation_path(@conn, :show, inivitation) %></span>
+        <span><%= link "Edit", to: Routes.inivitation_path(@conn, :edit, inivitation) %></span>
+        <span><%= link "Delete", to: Routes.inivitation_path(@conn, :delete, inivitation), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Inivitation", to: Routes.inivitation_path(@conn, :new) %></span>

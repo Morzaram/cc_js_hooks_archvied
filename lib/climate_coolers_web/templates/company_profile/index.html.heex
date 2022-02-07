@@ -1,0 +1,32 @@
+<h1>Listing Company profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Description</th>
+      <th>Established in</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for company_profile <- @company_profiles do %>
+    <tr>
+      <td><%= company_profile.name %></td>
+      <td><%= company_profile.url %></td>
+      <td><%= company_profile.description %></td>
+      <td><%= company_profile.established_in %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.company_profile_path(@conn, :show, company_profile) %></span>
+        <span><%= link "Edit", to: Routes.company_profile_path(@conn, :edit, company_profile) %></span>
+        <span><%= link "Delete", to: Routes.company_profile_path(@conn, :delete, company_profile), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Company profile", to: Routes.company_profile_path(@conn, :new) %></span>

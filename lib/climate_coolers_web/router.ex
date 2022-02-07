@@ -93,14 +93,14 @@ defmodule ClimateCoolersWeb.Router do
   ## Admin
   scope "/", ClimateCoolersWeb do
     pipe_through [:browser, :require_authenticated_user]
-    resources "/a/individuals", IndividualController
-    resources "/a/companies", CompanyController
+    resources "/a/people", PersonProfileController
+    resources "/a/companies", CompanyProfileController
   end
 
   ## Public Facing
   scope "/", ClimateCoolersWeb do
     pipe_through [:browser]
-    resources "/individuals", IndividualController, only: [:index, :show]
-    resources "/companies", CompanyController, only: [:index, :show]
+    resources "/people", PersonProfileController, only: [:index, :show]
+    resources "/companies", CompanyProfileController, only: [:index, :show]
   end
 end

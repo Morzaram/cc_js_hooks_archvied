@@ -1,0 +1,30 @@
+<h1>Listing Person profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Birthdate</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for person_profile <- @person_profiles do %>
+    <tr>
+      <td><%= person_profile.name %></td>
+      <td><%= person_profile.description %></td>
+      <td><%= person_profile.birthdate %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.person_profile_path(@conn, :show, person_profile) %></span>
+        <span><%= link "Edit", to: Routes.person_profile_path(@conn, :edit, person_profile) %></span>
+        <span><%= link "Delete", to: Routes.person_profile_path(@conn, :delete, person_profile), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Person profile", to: Routes.person_profile_path(@conn, :new) %></span>

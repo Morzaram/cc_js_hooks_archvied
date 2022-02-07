@@ -1,0 +1,5 @@
+<h1>Edit Company profile</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.company_profile_path(@conn, :update, @company_profile)) %>
+
+<span><%= link "Back", to: Routes.company_profile_path(@conn, :index) %></span>

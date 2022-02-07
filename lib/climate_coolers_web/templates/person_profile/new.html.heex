@@ -1,0 +1,5 @@
+<h1>New Person profile</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.person_profile_path(@conn, :create)) %>
+
+<span><%= link "Back", to: Routes.person_profile_path(@conn, :index) %></span>
