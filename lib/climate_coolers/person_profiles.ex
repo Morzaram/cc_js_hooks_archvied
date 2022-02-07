@@ -2,6 +2,8 @@ defmodule ClimateCoolers.PersonProfiles do
   @moduledoc """
   The PersonProfiles context.
   """
+  require IEx
+
   import Ecto.Query, warn: false
   import Ecto
   alias ClimateCoolers.Repo
