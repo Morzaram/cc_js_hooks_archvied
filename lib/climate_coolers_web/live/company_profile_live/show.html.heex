@@ -3,7 +3,7 @@
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.profile_show_path(@socket, :show, @profile)}>
     <.live_component
-      module={ClimateCoolersWeb.ProfileLive.FormComponent}
+      module={ClimateCoolersWeb.CompanyProfileLive.FormComponent}
       id={@profile.id}
       title={@page_title}
       action={@live_action}
@@ -23,4 +23,4 @@
 </ul>
 
 <span><%= live_patch "Edit", to: Routes.profile_show_path(@socket, :edit, @profile), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.profile_index_path(@socket, :index) %></span>
+<span><%= live_redirect "Back", to: Routes.company_profile_index_path(@socket, :index) %></span>

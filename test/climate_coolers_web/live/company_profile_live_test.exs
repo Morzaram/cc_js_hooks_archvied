@@ -1,4 +1,4 @@
-defmodule ClimateCoolersWeb.CompanyProfileLiveTest do
+defmodule ClimateCoolersWeb.CompanyCompanyProfileLiveTest do
   use ClimateCoolersWeb.ConnCase
 
   import Phoenix.LiveViewTest
@@ -48,7 +48,9 @@ defmodule ClimateCoolersWeb.CompanyProfileLiveTest do
     test "updates company_profile in listing", %{conn: conn, company_profile: company_profile} do
       {:ok, index_live, _html} = live(conn, Routes.company_profile_index_path(conn, :index))
 
-      assert index_live |> element("#company_profile-#{company_profile.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#company_profile-#{company_profile.id} a", "Edit")
+             |> render_click() =~
                "Edit Company profile"
 
       assert_patch(index_live, Routes.company_profile_index_path(conn, :edit, company_profile))
@@ -70,7 +72,10 @@ defmodule ClimateCoolersWeb.CompanyProfileLiveTest do
     test "deletes company_profile in listing", %{conn: conn, company_profile: company_profile} do
       {:ok, index_live, _html} = live(conn, Routes.company_profile_index_path(conn, :index))
 
-      assert index_live |> element("#company_profile-#{company_profile.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#company_profile-#{company_profile.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#company_profile-#{company_profile.id}")
     end
   end
@@ -79,14 +84,16 @@ defmodule ClimateCoolersWeb.CompanyProfileLiveTest do
     setup [:create_company_profile]
 
     test "displays company_profile", %{conn: conn, company_profile: company_profile} do
-      {:ok, _show_live, html} = live(conn, Routes.company_profile_show_path(conn, :show, company_profile))
+      {:ok, _show_live, html} =
+        live(conn, Routes.company_profile_show_path(conn, :show, company_profile))
 
       assert html =~ "Show Company profile"
       assert html =~ company_profile.name
     end
 
     test "updates company_profile within modal", %{conn: conn, company_profile: company_profile} do
-      {:ok, show_live, _html} = live(conn, Routes.company_profile_show_path(conn, :show, company_profile))
+      {:ok, show_live, _html} =
+        live(conn, Routes.company_profile_show_path(conn, :show, company_profile))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Company profile"

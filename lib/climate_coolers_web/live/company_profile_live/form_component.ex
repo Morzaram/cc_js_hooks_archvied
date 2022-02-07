@@ -1,4 +1,4 @@
-defmodule ClimateCoolersWeb.CompanyProfileLive.FormComponent do
+defmodule ClimateCoolersWeb.CompanyCompanyProfileLive.FormComponent do
   use ClimateCoolersWeb, :live_component
 
   alias ClimateCoolers.CompanyProfiles

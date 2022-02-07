@@ -1,4 +1,4 @@
-defmodule ClimateCoolersWeb.ProfileLive.FormComponent do
+defmodule ClimateCoolersWeb.PersonProfileLive.FormComponent do
   use ClimateCoolersWeb, :live_component
 
   alias ClimateCoolers.PersonProfiles

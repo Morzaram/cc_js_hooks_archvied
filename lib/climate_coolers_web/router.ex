@@ -91,16 +91,36 @@ defmodule ClimateCoolersWeb.Router do
   end
 
   ## Admin
-  scope "/", ClimateCoolersWeb do
+  scope "/u/people", ClimateCoolersWeb, as: :user do
     pipe_through [:browser, :require_authenticated_user]
-    resources "/a/people", PersonProfileController
-    resources "/a/companies", CompanyProfileController
+    live "/", PersonProfileLive.Index, :index
+    live "/new", PersonProfileLive.Index, :new
+    live "/:id/edit", PersonProfileLive.Index, :edit
+
+    live "/:id", PersonProfileLive.Show, :show
+    live "/:id/show/edit", PersonProfileLive.Show, :edit
+  end
+
+  scope "/u/company", ClimateCoolersWeb, as: :user do
+    pipe_through [:browser, :require_authenticated_user]
+    live "/", CompanyProfileLive.Index, :index
+    live "/new", CompanyProfileLive.Index, :new
+    live "/:id/edit", CompanyProfileLive.Index, :edit
+
+    live "/:id", CompanyProfileLive.Show, :show
+    live "/:id/show/edit", CompanyProfileLive.Show, :edit
   end
 
   ## Public Facing
-  scope "/", ClimateCoolersWeb do
+  scope "/people", ClimateCoolersWeb do
     pipe_through [:browser]
-    resources "/people", PersonProfileController, only: [:index, :show]
-    resources "/companies", CompanyProfileController, only: [:index, :show]
+    live "/", PersonProfileLive.Index, :index
+    live "/:id", PersonProfileLive.Show, :show
+  end
+
+  scope "/company", ClimateCoolersWeb do
+    pipe_through [:browser]
+    live "/", CompanyProfileLive.Index, :index
+    live "/:id", CompanyProfileLive.Show, :show
   end
 end

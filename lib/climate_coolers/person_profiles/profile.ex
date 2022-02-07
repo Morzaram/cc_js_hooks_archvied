@@ -3,7 +3,10 @@ defmodule ClimateCoolers.PersonProfiles.Profile do
   import Ecto.Changeset
 
   schema "person_profiles" do
+    field :birthdate, :date
+    field :description, :string
     field :name, :string
+    field :owner_id, :id
 
     timestamps()
   end
@@ -11,7 +14,7 @@ defmodule ClimateCoolers.PersonProfiles.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :description, :birthdate])
+    |> validate_required([:name, :description, :birthdate])
   end
 end

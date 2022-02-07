@@ -4,9 +4,9 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
   import Phoenix.LiveViewTest
   import ClimateCoolers.PersonProfilesFixtures
 
-  @create_attrs %{name: "some name"}
-  @update_attrs %{name: "some updated name"}
-  @invalid_attrs %{name: nil}
+  @create_attrs %{birthdate: %{day: 6, month: 2, year: 2022}, description: "some description", name: "some name"}
+  @update_attrs %{birthdate: %{day: 7, month: 2, year: 2022}, description: "some updated description", name: "some updated name"}
+  @invalid_attrs %{birthdate: %{day: 30, month: 2, year: 2022}, description: nil, name: nil}
 
   defp create_profile(_) do
     profile = profile_fixture()
@@ -20,7 +20,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
       {:ok, _index_live, html} = live(conn, Routes.profile_index_path(conn, :index))
 
       assert html =~ "Listing Person profiles"
-      assert html =~ profile.name
+      assert html =~ profile.description
     end
 
     test "saves new profile", %{conn: conn} do
@@ -33,7 +33,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
 
       assert index_live
              |> form("#profile-form", profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         index_live
@@ -42,7 +42,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
         |> follow_redirect(conn, Routes.profile_index_path(conn, :index))
 
       assert html =~ "Profile created successfully"
-      assert html =~ "some name"
+      assert html =~ "some description"
     end
 
     test "updates profile in listing", %{conn: conn, profile: profile} do
@@ -55,7 +55,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
 
       assert index_live
              |> form("#profile-form", profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         index_live
@@ -64,7 +64,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
         |> follow_redirect(conn, Routes.profile_index_path(conn, :index))
 
       assert html =~ "Profile updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "some updated description"
     end
 
     test "deletes profile in listing", %{conn: conn, profile: profile} do
@@ -82,7 +82,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
       {:ok, _show_live, html} = live(conn, Routes.profile_show_path(conn, :show, profile))
 
       assert html =~ "Show Profile"
-      assert html =~ profile.name
+      assert html =~ profile.description
     end
 
     test "updates profile within modal", %{conn: conn, profile: profile} do
@@ -95,7 +95,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
 
       assert show_live
              |> form("#profile-form", profile: @invalid_attrs)
-             |> render_change() =~ "can&#39;t be blank"
+             |> render_change() =~ "is invalid"
 
       {:ok, _, html} =
         show_live
@@ -104,7 +104,7 @@ defmodule ClimateCoolersWeb.ProfileLiveTest do
         |> follow_redirect(conn, Routes.profile_show_path(conn, :show, profile))
 
       assert html =~ "Profile updated successfully"
-      assert html =~ "some updated name"
+      assert html =~ "some updated description"
     end
   end
 end
