@@ -8,6 +8,7 @@ defmodule ClimateCoolers.PersonProfiles.Profile do
     field :name, :string
     field :owner_id, :id
 
+    has_one :owner, {"users", ClimateCoolers.Accounts.User}
     timestamps()
   end
 
