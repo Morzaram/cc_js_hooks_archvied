@@ -1,8 +1,7 @@
 defmodule ClimateCoolersWeb.CompanyProfileController do
   use ClimateCoolersWeb, :controller
 
-  alias ClimateCoolers.Profiles.Company
-  alias ClimateCoolers.Profiles.Company.CompanyProfile
+  alias ClimateCoolers.CompanyProfiles.Profile
 
   def index(conn, _params) do
     company_profiles = Company.list_company_profiles()
@@ -10,7 +9,7 @@ defmodule ClimateCoolersWeb.CompanyProfileController do
   end
 
   def new(conn, _params) do
-    changeset = Company.change_company_profile(%CompanyProfile{})
+    changeset = Company.change_company_profile(%Profile{})
     render(conn, "new.html", changeset: changeset)
   end
 

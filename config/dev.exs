@@ -25,7 +25,7 @@ config :climate_coolers, ClimateCoolersWeb.Endpoint,
   secret_key_base: "Q4B9hB0D9Tj3mfVzVWlFq85fhBZVnqkKTF8BzX/GAHeVd4LuFEid7RMnzIdZZnct",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    node: ["build.js", "--watch", cd: Path.expand("../assets", __DIR__)],
     npx: [
       "tailwindcss",
       "--input=css/app.css",

@@ -1,8 +1,6 @@
 defmodule ClimateCoolersWeb.PersonProfileController do
   use ClimateCoolersWeb, :controller
-  import IEx
-  alias ClimateCoolers.Profiles.Person
-  alias ClimateCoolers.Profiles.Person.PersonProfile
+  alias ClimateCoolers.PersonProfiles.Profile
 
   def index(conn, _params) do
     person_profiles = Person.list_person_profiles()
@@ -10,7 +8,7 @@ defmodule ClimateCoolersWeb.PersonProfileController do
   end
 
   def new(conn, _params) do
-    changeset = Person.change_person_profile(%PersonProfile{})
+    changeset = Person.change_person_profile(%Profile{})
     render(conn, "new.html", changeset: changeset)
   end
 
