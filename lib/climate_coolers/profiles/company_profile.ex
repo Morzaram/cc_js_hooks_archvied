@@ -1,8 +1,7 @@
 defmodule ClimateCoolers.Profiles.CompanyProfile do
   use Ecto.Schema
   import Ecto.Changeset
-  alias ClimateCoolers.ProfileImages.Image
-  alias ClimateCoolers.ProfileLink.Link
+  alias ClimateCoolers.Profiles.ProfileAttributes.{Image, Link}
 
   schema "company_profiles" do
     field :description, :string

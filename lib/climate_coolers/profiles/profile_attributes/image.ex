@@ -1,16 +1,15 @@
-defmodule ClimateCoolers.ProfileAttributes.Image do
+defmodule ClimateCoolers.Profiles.ProfileAttributes.Image do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ClimateCoolers.PersonProfiles
-  alias ClimateCoolers.CompanyProfiles
+  alias ClimateCoolers.Profiles.{PersonProfile, CompanyProfile}
 
   schema "profile_images" do
     field(:alt, :string)
     field(:url, :string)
 
-    belongs_to(:person_profile, PersonProfiles.Profile)
-    belongs_to(:company_profile, CompanyProfiles.Profile)
+    belongs_to(:person_profile, PersonProfile)
+    belongs_to(:company_profile, CompanyProfile)
     timestamps()
   end
 

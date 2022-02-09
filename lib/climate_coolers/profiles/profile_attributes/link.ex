@@ -1,18 +1,15 @@
-defmodule ClimateCoolers.ProfileAttributes.Link do
+defmodule ClimateCoolers.Profiles.ProfileAttributes.Link do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ClimateCoolers.PersonProfiles
-  alias ClimateCoolers.CompanyProfiles
+  alias ClimateCoolers.Profiles.{CompanyProfile, PersonProfile}
 
   schema "profile_link" do
     field :title, :string
     field :url, :string
-    field :company_id, :id
-    field :person_id, :id
 
-    belongs_to :person_profile, PersonProfiles.Profile
-    belongs_to :company_profile, CompanyProfiles.Profile
+    belongs_to :person_profile, PersonProfile
+    belongs_to :company_profile, CompanyProfile
 
     timestamps()
   end

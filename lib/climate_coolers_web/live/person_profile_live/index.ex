@@ -1,6 +1,5 @@
 defmodule ClimateCoolersWeb.PersonProfileLive.Index do
   use ClimateCoolersWeb, :live_view
-
   alias ClimateCoolers.PersonProfiles
   alias ClimateCoolers.Profiles.PersonProfile, as: Profile
 

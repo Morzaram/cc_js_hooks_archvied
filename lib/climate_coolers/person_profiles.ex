@@ -3,12 +3,12 @@ defmodule ClimateCoolers.PersonProfiles do
   The PersonProfiles context.
   """
   require IEx
-
+  import Ecto.Changeset
   import Ecto.Query, warn: false
-  import Ecto
   alias ClimateCoolers.Repo
 
   alias ClimateCoolers.Profiles.PersonProfile, as: Profile
+  alias ClimateCoolers.Profiles.ProfileAttributes.{Link, Image}
 
   @doc """
   Returns the list of person_profiles.
@@ -37,7 +37,7 @@ defmodule ClimateCoolers.PersonProfiles do
       ** (Ecto.NoResultsError)
 
   """
-  def get_profile!(id), do: Repo.get!(Profile, id)
+  def get_profile!(id), do: Repo.get!(Profile, id) |> Repo.preload([:links, :pics])
 
   @doc """
   Creates a profile.
@@ -100,16 +100,22 @@ defmodule ClimateCoolers.PersonProfiles do
       %Ecto.Changeset{data: %Profile{}}
 
   """
+
+  # def change_profile(%Profile{} = profile) do
+  #   Profile.changeset(profile, %{})
+  # end
+
+  # def change_profile(%PersonRegistration{} = profile) do
+  #   PersonRegistration.changeset(profile, %{})
+  # end
+
   def change_profile(%Profile{} = profile, attrs \\ %{}) do
-    IEx.pry()
-
-    # if profile_id exists
-    profile =
-      profile
-      |> build_assoc(:pics)
-      |> build_assoc(:links)
-
-    # else
     Profile.changeset(profile, attrs)
+    |> cast_assoc(:links, with: &Link.changeset/2)
+    |> cast_assoc(:pics, with: &Image.changeset/2)
   end
+
+  # def change_profile(%PersonRegistration{} = profile, attrs) do
+  #   PersonRegistration.changeset(profile, attrs)
+  # end
 end

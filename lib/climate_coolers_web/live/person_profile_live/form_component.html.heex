@@ -22,12 +22,23 @@
     <%= error_tag f, :birthdate %>
 
     <%= inputs_for f, :links, fn fl -> %>
+      <p>Title</p>
+      <%= text_input fl, :title %>
+      <p>url</p>
       <%= text_input fl, :url %>
     <% end %>
 
+    <a phx-click="add-link" phx-target={@myself} >Add Link</a>
+
     <%= inputs_for f, :pics, [multipart: true], fn fl -> %>
+      <p>alt</p>
+      <%= text_input fl, :alt %>
+      <p>url</p>
       <%= text_input fl, :url %>
     <% end %>
+
+    <a phx-click="add-pic" phx-target={@myself} >Add Pic</a>
+
   
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>

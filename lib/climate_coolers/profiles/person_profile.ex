@@ -2,8 +2,7 @@ defmodule ClimateCoolers.Profiles.PersonProfile do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias ClimateCoolers.ProfileImages.Image
-  alias ClimateCoolers.ProfileLink.Link
+  alias ClimateCoolers.Profiles.ProfileAttributes.{Image, Link}
 
   schema "person_profiles" do
     field :birthdate, :date
@@ -22,5 +21,7 @@ defmodule ClimateCoolers.Profiles.PersonProfile do
     profile
     |> cast(attrs, [:name, :description, :birthdate])
     |> validate_required([:name, :description, :birthdate])
+    |> cast_assoc(:links)
+    |> cast_assoc(:pics)
   end
 end
