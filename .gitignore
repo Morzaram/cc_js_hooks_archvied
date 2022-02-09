@@ -34,3 +34,4 @@ npm-debug.log
 
 /.elixir_ls/
 /node_modules/
+.elixir_ls/
