@@ -26,6 +26,19 @@ defmodule ClimateCoolersWeb.PersonProfileLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  def handle_event("text-editor", %{"text_content" => content}, socket) do
+    IO.inspect(content)
+
+    {:noreply, socket}
+
+    # changeset =
+    #   socket.assigns.profile
+    #   |> PersonProfiles.change_profile(profile_params)
+    #   |> Map.put(:action, :validate)
+
+    # {:noreply, assign(socket, :changeset, changeset)}
+  end
+
   def handle_event("validate", props, socket) do
     changeset =
       socket.assigns.profile
@@ -49,7 +62,8 @@ defmodule ClimateCoolersWeb.PersonProfileLive.FormComponent do
     {:noreply, socket |> assign(:changeset, changeset)}
   end
 
-  def handle_event("save", %{"person_profile" => profile_params}, socket) do
+  def handle_event("save", %{"person_profile" => profile_params} = props, socket) do
+    IO.inspect(socket)
     save_profile(socket, socket.assigns.action, profile_params)
   end
 
