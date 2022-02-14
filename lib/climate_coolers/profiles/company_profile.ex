@@ -4,7 +4,7 @@ defmodule ClimateCoolers.Profiles.CompanyProfile do
   alias ClimateCoolers.Profiles.ProfileAttributes.{Image, Link}
 
   schema "company_profiles" do
-    field :description, :string
+    field :description, :map
     field :established, :date
     field :name, :string
     field :url, :string

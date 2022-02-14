@@ -1,34 +1,63 @@
 <script>
-  import { onMount } from "svelte";
-  export let placeholder;
+  import { onMount, onDestroy } from "svelte";
+  import { Editor } from "@tiptap/core";
+  import StarterKit from "@tiptap/starter-kit";
+  var throttle = require("lodash.throttle");
 
+  let element;
   let editor;
-
-  export let toolbarOptions = [
-    [{ header: 1 }, { header: 2 }, "blockquote", "link", "image", "video"],
-    ["bold", "italic", "underline", "strike"],
-    [{ list: "ordered" }, { list: "ordered" }],
-    [{ align: [] }],
-    ["clean"],
-  ];
-
-  onMount(async () => {
-    const { default: Quill } = await import("quill");
-
-    let quill = new Quill(editor, {
-      modules: {
-        toolbar: toolbarOptions,
+  let content;
+  onMount(() => {
+    editor = new Editor({
+      element: element,
+      extensions: [StarterKit],
+      content: "<p>Hello World! 🌍️ </p>",
+      onTransaction: () => {
+        // force re-render so `editor.isActive` works as expected
+        editor = editor;
+        window.textEditorHook.sendDataDebounced(editor.getHTML());
       },
-      theme: "snow",
-      placeholder: placeholder,
     });
+  });
+
+  onDestroy(() => {
+    if (editor) {
+      editor.destroy();
+    }
   });
 </script>
 
-<div class="editor-wrapper">
-  <div bind:this={editor} />
+<div>
+  {#if editor}
+    <button
+      type="button"
+      on:click={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+      class:active={editor.isActive("heading", { level: 1 })}
+    >
+      H1
+    </button>
+    <button
+      type="button"
+      on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+      class:active={editor.isActive("heading", { level: 2 })}
+    >
+      H2
+    </button>
+    <button
+      type="button"
+      on:click={() => editor.chain().focus().setParagraph().run()}
+      class:active={editor.isActive("paragraph")}
+    >
+      P
+    </button>
+  {/if}
+
+  <div bind:this={element} />
 </div>
 
 <style>
-  @import "https://cdn.quilljs.com/1.3.6/quill.snow.css";
+  button.active {
+    background: black;
+    color: white;
+  }
 </style>
