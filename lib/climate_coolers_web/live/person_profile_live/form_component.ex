@@ -29,18 +29,6 @@ defmodule ClimateCoolersWeb.PersonProfileLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
-  def handle_event("text-editor", %{"text_content" => content}, socket) do
-    # new_profile =
-    #   socket.assigns.profile
-    #   |> Map.from_struct()
-    #   |> Map.put(:description, content)
-
-    # changeset = socket.changeset.data |> PersonProfiles.change_profile(new_profile)
-
-    # IO.inspect(changeset)
-    {:noreply, socket}
-  end
-
   def handle_event("validate", props, socket) do
     IO.inspect(props)
 

@@ -20,7 +20,7 @@
     <%= error_tag f, :name %>
   
     <%= label f, :description %>
-    <%= text_input f, :description, id: "editor_input" %>
+    <%= hidden_input f, :description, id: "editor_input" %>
 
     <.live_component
       module={ClimateCoolersWeb.Live.ComponentsLive.TipTap}
