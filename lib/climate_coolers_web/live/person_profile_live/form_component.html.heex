@@ -20,7 +20,6 @@
     <%= error_tag f, :name %>
   
     <%= label f, :description %>
-    <%= hidden_input f, :description, id: "editor_input" %>
 
     <.live_component
       module={ClimateCoolersWeb.Live.ComponentsLive.TipTap}
@@ -28,6 +27,8 @@
       profile={@profile}
       return_to={Routes.person_profile_index_path(@socket, :index)}
       text={@profile.description || "<p class=\"centered narrow\">Hi! There</p>"}
+      field={:description}
+      form={f}
     />
     
     

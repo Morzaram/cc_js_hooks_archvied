@@ -245,9 +245,8 @@ defmodule ClimateCoolersWeb.Live.ComponentsLive.TipTap do
         <div x-ref="editorReference" class="editor-output"></div>
         </div>
 
-        <button class="save-button">
-          Save
-        </button>
+        <%= hidden_input @form, @field, id: "editor_input" %>
+
       </div>
     """
   end
