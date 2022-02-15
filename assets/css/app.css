@@ -104,7 +104,7 @@
 }
 
 button {
-  @apply btn btn-sm;
+  @apply text-red-400 btn btn-sm;
 }
 .is-active {
   @apply bg-red-100;

@@ -1,14 +1,22 @@
 // Svelte
 import 'svonix'
 import Alpine from 'alpinejs'
+import SaveEditorContent from './hooks/saveEditorHook'
+
 // We import the CSS which is extracted to its own file by esbuild.
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
 import "../css/app.css"
 // Setting hooks for when I need to add them later
 let Hooks = {}
-
+Hooks.SaveEditorContent = SaveEditorContent
 import {TipTap} from './hooks/tiptap'
 Hooks.TipTap = TipTap
+
+import { initEditor } from './vendors/editor'
+// Tiptap editor
+document.addEventListener('alpine:init', () => {
+  Alpine.data('editor', (content) => initEditor(content))
+})
 
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
@@ -57,8 +65,8 @@ window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 liveSocket.connect()
 
 // expose liveSocket on window for web console debug logs and latency simulation:
-// >> liveSocket.enableDebug()
->> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
+>> liveSocket.enableDebug()
+// >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 window.Alpine = Alpine
