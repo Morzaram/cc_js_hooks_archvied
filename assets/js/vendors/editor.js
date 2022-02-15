@@ -16,10 +16,7 @@ export const initEditor = function (content) {
   return {
     init () {
       const _this = this
-      const debounceCall = _debounce((html) => 
-          window.saveEditorHook.pushEventTo(window.saveEditorHook.el.phxHookId, "text-editor", {
-          text_content: html,
-        }), 1000, { maxWait: 3000 });
+      const debounceCall = _debounce((html) => document.querySelector('#editor_input').value = html, 500, { maxWait: 1000 });
       AlpineEditor = new Editor({
         element: this.$refs.editorReference,
         content: content,
@@ -85,6 +82,7 @@ export const initEditor = function (content) {
         ],
         onCreate () {
           _this.updatedAt = Date.now()
+          window.editorHtmlData = editor.getHTML()
         },
         onUpdate () {
           _this.updatedAt = Date.now()
@@ -93,7 +91,7 @@ export const initEditor = function (content) {
           _this.updatedAt = Date.now()
         },
       }).on('transaction', ({ editor, transaction }) => {
-        debounceCall(editor.getHTML());
+        debounceCall(editor.getHTML())
       })
     },
     // Passing updatedAt here to make Alpine rerender the buttons.

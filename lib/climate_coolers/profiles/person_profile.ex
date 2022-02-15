@@ -6,7 +6,7 @@ defmodule ClimateCoolers.Profiles.PersonProfile do
 
   schema "person_profiles" do
     field :birthdate, :date
-    field :description, :map
+    field :description, :string
     field :name, :string
 
     belongs_to :owner, ClimateCoolers.Accounts.User
