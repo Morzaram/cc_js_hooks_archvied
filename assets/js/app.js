@@ -1,14 +1,12 @@
 // Svelte
 import 'svonix'
 import Alpine from 'alpinejs'
-import SaveEditorContent from './hooks/saveEditorHook'
 
 // We import the CSS which is extracted to its own file by esbuild.
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
 import "../css/app.css"
 // Setting hooks for when I need to add them later
 let Hooks = {}
-Hooks.SaveEditorContent = SaveEditorContent
 import {TipTap} from './hooks/tiptap'
 Hooks.TipTap = TipTap
 

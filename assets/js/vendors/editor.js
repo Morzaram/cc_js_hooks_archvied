@@ -82,7 +82,7 @@ export const initEditor = function (content) {
         ],
         onCreate () {
           _this.updatedAt = Date.now()
-          window.editorHtmlData = editor.getHTML()
+          window.editorHtmlData = AlpineEditor.getHTML()
         },
         onUpdate () {
           _this.updatedAt = Date.now()

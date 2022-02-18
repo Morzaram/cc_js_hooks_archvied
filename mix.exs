@@ -50,6 +50,7 @@ defmodule ClimateCoolers.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:svonix, git: "https://github.com/nikokozak/svonix", tag: "v0.5.1"}
     ]
   end

@@ -3,10 +3,8 @@ defmodule ClimateCoolersWeb.Live.ComponentsLive.TipTap do
 
   def render(assigns) do
     ~H"""
-    <div id="editor" class="editor" phx-update="ignore" phx-hook="SaveEditorContent">
+    <div id="editor" class="editor" phx-update="ignore" >
         <div x-data={"editor('#{@text}')"}>
-
-
         <div class="editor-menu-bubble">
           <button
             type="button"
@@ -246,7 +244,6 @@ defmodule ClimateCoolersWeb.Live.ComponentsLive.TipTap do
         </div>
 
         <%= hidden_input @form, @field, id: "editor_input" %>
-
       </div>
     """
   end

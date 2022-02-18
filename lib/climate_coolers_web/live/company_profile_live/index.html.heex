@@ -34,7 +34,7 @@
 
         <td>
           <span><%= live_redirect "Show", to: Routes.company_profile_show_path(@socket, :show, profile) %></span>
-          <span><%= live_patch "Edit", to: Routes.company_profile_index_path(@socket, :edit, profile) %></span>
+          <span><%= live_patch "Edit", to: Routes.user_company_profile_index_path(@socket, :edit, profile) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: profile.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
@@ -42,4 +42,4 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Profile", to: Routes.company_profile_index_path(@socket, :new) %></span>
+<span><%= live_patch "New Profile", to: Routes.user_company_profile_index_path(@socket, :new) %></span>

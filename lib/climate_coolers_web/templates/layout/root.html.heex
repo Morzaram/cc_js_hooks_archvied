@@ -18,6 +18,8 @@
             <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
               <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
+            <li><%= link "Create Business Profile", to: Routes.user_company_profile_index_path(@conn, :index) %></li>
+            <li><%= link "Create Personal Profile", to: Routes.user_person_profile_index_path(@conn, :index) %></li>
           </ul>
           <%= render "_user_menu.html", assigns %>
         </nav>
