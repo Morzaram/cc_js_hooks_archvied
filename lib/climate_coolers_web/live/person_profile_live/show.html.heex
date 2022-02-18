@@ -22,7 +22,7 @@
 
   <li>
     <strong>Description:</strong>
-    <%= @profile.description %>
+    <%= raw({:safe, @profile.description}) %>
   </li>
 
   <li>
