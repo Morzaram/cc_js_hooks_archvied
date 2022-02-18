@@ -17,6 +17,13 @@ export const initEditor = function (content) {
     init () {
       const _this = this
       const debounceCall = _debounce((html) => document.querySelector('#editor_input').value = html, 500, { maxWait: 1000 });
+      const addSaveListener = document.querySelector("#editor").addEventListener('keydown', function (event) {
+        if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+          console.log('Firing')
+          event.preventDefault()
+          document.querySelector("#save").click();
+        }
+      });
       AlpineEditor = new Editor({
         element: this.$refs.editorReference,
         content: content,
@@ -83,6 +90,7 @@ export const initEditor = function (content) {
         onCreate () {
           _this.updatedAt = Date.now()
           window.editorHtmlData = AlpineEditor.getHTML()
+          addSaveListener
         },
         onUpdate () {
           _this.updatedAt = Date.now()

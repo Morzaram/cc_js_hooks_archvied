@@ -1,9 +1,9 @@
 <div>    
-<div x-data="{ show: true }">
+  <div x-data="{ show: true }">
     <span x-show="show">
       Alpine 
     </span>
-</div>
+  </div>
   <h2><%= @title %></h2>
 
   <.form
@@ -68,10 +68,10 @@
 
   
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit "Save", phx_disable_with: "Saving...", id: "save"%>
     </div>
   </.form>
-
+  
 </div>
 
 

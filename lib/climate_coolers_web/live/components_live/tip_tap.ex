@@ -4,7 +4,7 @@ defmodule ClimateCoolersWeb.Live.ComponentsLive.TipTap do
   def render(assigns) do
     ~H"""
     <div id="editor" class="editor" phx-update="ignore" >
-        <div x-data={"editor('#{@text}')"}>
+        <div x-data={"editor(`#{@text}`)"}>
         <div class="editor-menu-bubble">
           <button
             type="button"
@@ -244,6 +244,16 @@ defmodule ClimateCoolersWeb.Live.ComponentsLive.TipTap do
         </div>
 
         <%= hidden_input @form, @field, id: "editor_input" %>
+
+        <script>
+        document.querySelector("#editor").addEventListener('keydown', function (event) {
+            if (event.key === 's' && (event.ctrlKey || event.metaKey)) {
+              console.log('Firing')
+              event.preventDefault()
+              document.querySelector("#save").click();
+            }
+          });
+        </script>
       </div>
     """
   end
